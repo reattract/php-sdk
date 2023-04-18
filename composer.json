@@ -1,0 +1,22 @@
+{
+    "name": "reattract/reattract",
+    "description": "Reattract.io API client",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Reattract\\Reattract\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Justin Burris",
+            "email": "justin@reattract.io"
+        }
+    ],
+    "minimum-stability": "dev",
+    "license": "proprietary",
+    "require": {
+        "guzzlehttp/guzzle": "dev-master",
+        "firebase/php-jwt": "dev-main"
+    }
+}
