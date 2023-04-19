@@ -4,7 +4,8 @@
     "type": "library",
     "autoload": {
         "psr-4": {
-            "Reattract\\Reattract\\": "src/"
+            "Reattract\\Reattract\\": "src/",
+            "Reattract\\Reattract\\Resources": "src/resources"
         }
     },
     "authors": [
