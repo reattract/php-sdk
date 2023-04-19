@@ -9,12 +9,12 @@ class Request
 {
 	public $path;
 
-	public function __construct($path) 
+	public function __construct($path)
 	{
 		$this->path = $path;
 	}
 
-	public function get($query = []) 
+	public function get($query = [])
 	{
 		$client = $this->client();
 		$response = $client->request('GET', $this->url(), [
@@ -24,8 +24,8 @@ class Request
 
 		return $this->formatResponse($response);
 	}
-	
-	public function patch($json = []) 
+
+	public function patch($json = [])
 	{
 		$client = $this->client();
 		$response = $client->request('PATCH', $this->url(), [
@@ -34,16 +34,16 @@ class Request
 
 		return $this->formatResponse($response);
 	}
-	
-	public function delete() 
+
+	public function delete()
 	{
 		$client = $this->client();
 		$response = $client->request('DELETE', $this->url());
 
 		return $this->formatResponse($response);
 	}
-	
-	public function post($json = []) 
+
+	public function post($json = [])
 	{
 		$client = $this->client();
 		$response = $client->request('POST', $this->url(), [
@@ -53,7 +53,7 @@ class Request
 		return $this->formatResponse($response);
 	}
 
-	private function client() 
+	private function client()
 	{
 		return new Client([
 			'headers' => [
@@ -68,12 +68,20 @@ class Request
 	{
 		$contents = $response->getBody()->getContents();
 		$status = $response->getStatusCode();
+		$pagination = $this->extrctPagination($response);
 
-		return [
+		$helpfulResponse = [
 			'body' => json_decode($contents, true),
 			'status' => $status,
 			'response' => $response
 		];
+
+		if($pagination !== null)
+		{
+			$helpfulResponse['pagination'] = $pagination;
+		}
+
+		return $helpfulResponse;
 	}
 
 	private function url()
@@ -85,5 +93,22 @@ class Request
 	{
 		$jwtGenerator = new JwtGenerator();
 		return $jwtGenerator->generate();
+	}
+
+	private function extrctPagination($response)
+	{
+		if($response->hasHeader('Page-Items') === false)
+		{
+			return null;
+		}
+
+		$headers = $response->getHeaders();
+
+		return [
+			'pageItems' => $headers['Page-Items'],
+			'currentPage' => $headers['Current-Page'],
+			'totalPages' => $headers['Total-Pages'],
+			'totalCount' => $headers['Total-Count']
+		];
 	}
 }
