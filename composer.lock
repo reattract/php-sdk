@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2bff04eeef154aa165a920b15b22bcd4",
+    "content-hash": "5cb5d8d3fb2757bc16763e5e422769eb",
     "packages": [
         {
             "name": "firebase/php-jwt",
@@ -605,6 +605,59 @@
             "time": "2019-03-08T08:55:37+00:00"
         },
         {
+            "name": "svix/svix",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/svix/svix-webhooks.git",
+                "reference": "f09a4afc7adbdb764f616d5b1958bb4357da2eb7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/svix/svix-webhooks/zipball/f09a4afc7adbdb764f616d5b1958bb4357da2eb7",
+                "reference": "f09a4afc7adbdb764f616d5b1958bb4357da2eb7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.0",
+                "phpstan/phpstan": "^0.12.89",
+                "phpunit/phpunit": "^5.7"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Svix\\": "php/src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Svix",
+                    "email": "support@svix.com",
+                    "homepage": "http://www.svix.com"
+                }
+            ],
+            "description": "Svix PHP Library",
+            "homepage": "https://www.svix.com",
+            "keywords": [
+                "api",
+                "webhooks"
+            ],
+            "support": {
+                "issues": "https://github.com/svix/svix-webhooks/issues",
+                "source": "https://github.com/svix/svix-webhooks/tree/v0.83.1"
+            },
+            "time": "2023-04-06T20:15:54+00:00"
+        },
+        {
             "name": "symfony/deprecation-contracts",
             "version": "dev-main",
             "source": {
@@ -677,7 +730,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "guzzlehttp/guzzle": 20
+        "guzzlehttp/guzzle": 20,
+        "firebase/php-jwt": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

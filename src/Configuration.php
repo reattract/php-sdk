@@ -6,6 +6,7 @@ class Configuration
 {
 	public static $publicKey = null;
 	public static $secretKey = null;
+	public static $webhookSecretKey = null;
 	public static $apiVersion = '/v1';
 	public static $apiHost = 'api.reattract.io';
 	public static $useSsl = true;

@@ -1,7 +1,9 @@
 Reattract PHP SDK
 -----------------
 
-# Example integration
+## Example integration
+
+### Making calls
 
 ```php
 <?php
@@ -23,4 +25,33 @@ print_r($response['body']);
 
 // List call responses will be paginated and you can see the pagination data as follows
 print_r($response['pagination']);
+
+```
+
+### Verfiying Webhooks
+```php
+// Verify webhooks
+
+use Reattract\Reattract\Configuration;
+use Reattract\Reattract\WebhookVerification;
+
+Configuration::$webhookSecretKey = 'whsec_MfKQ9r8GKYqrTwjUPD8ILPZIo2LaLaSw';
+
+// Example payload and headers
+// The payload should be a raw payload
+$payload = '{"test": 2432232314}';
+$header = array(
+        'svix-id'  => 'msg_p5jXN8AQM9LWM0D4loKWxJek',
+        'svix-timestamp' => '1614265330',
+        'svix-signature' => 'v1,g0hM9SsE+OTPJTGt/tmIKtSyZlE3uFJELVlNIOLJ1OE=',
+        );
+
+// Throws on error, returns the verified content on success
+$wh = new WebhookVerification($payload, $header);
+$result = $wh->verify();
+// $result will be an associative array with the success status and the error [if present]
+// [
+//   'success' => false,
+//   'error' => <error object>
+// ];
 ```

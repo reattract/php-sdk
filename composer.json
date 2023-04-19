@@ -18,6 +18,7 @@
     "license": "proprietary",
     "require": {
         "guzzlehttp/guzzle": "dev-master",
-        "firebase/php-jwt": "dev-main"
+        "firebase/php-jwt": "dev-main",
+        "svix/svix": "dev-main"
     }
 }
