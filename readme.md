@@ -30,6 +30,7 @@ print_r($response['pagination']);
 
 ### Verfiying Webhooks
 ```php
+<?php
 // Verify webhooks
 
 use Reattract\Reattract\Configuration;
