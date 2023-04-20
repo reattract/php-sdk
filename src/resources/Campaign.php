@@ -5,7 +5,7 @@ namespace Reattract\Sdk\Resources;
 use Reattract\Sdk\Request;
 use Reattract\Sdk\PaginatedResponse;
 
-class Customer
+class Campaign
 {
     /**
      * @param array<string> $order
