@@ -18,9 +18,9 @@
   "license": "proprietary",
   "require": {
     "php": "^8.0",
-    "guzzlehttp/guzzle": "dev-master",
-    "firebase/php-jwt": "dev-main",
-    "svix/svix": "dev-main"
+    "guzzlehttp/guzzle": "^7.4",
+    "firebase/php-jwt": "^6.0",
+    "svix/svix": "^0.83.1"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "dev-master",
