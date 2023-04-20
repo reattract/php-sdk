@@ -12,7 +12,7 @@ class Customer
      */
     public static function create(string $userId, array $customerData = []): PaginatedResponse
     {
-        $json['organization_user_id'] = $userId;
+        $customerData['organization_user_id'] = $userId;
         return self::collectionRequest()->post($customerData);
     }
 
