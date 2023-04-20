@@ -8,37 +8,34 @@ use Svix\Exception\WebhookVerificationException;
 
 class WebhookVerification
 {
-  public $payload;
-  public $header;
+    public $payload;
+    public $header;
 
-  public function __construct($payload, $header)
-  {
-    $this->payload = $payload;
-    $this->header = $header;
-  }
-
-  public function verify()
-  {
-    try
+    public function __construct($payload, $header)
     {
-      $wh = new Webhook($this->securityToken());
-      $json = $wh->verify($this->payload, $this->header);
-      return [
-        'success' => true,
-        'error' => null
-      ];
-    } 
-    catch (WebhookVerificationException $e)
-    {
-      return [
-        'success' => false,
-        'error' => $e
-      ];
+        $this->payload = $payload;
+        $this->header = $header;
     }
-  }
 
-  private function securityToken()
-  {
-    return Configuration::$webhookSecretKey;
-  }
+    public function verify()
+    {
+        try {
+            $wh = new Webhook($this->securityToken());
+            $json = $wh->verify($this->payload, $this->header);
+            return [
+              'success' => true,
+              'error' => null
+            ];
+        } catch (WebhookVerificationException $e) {
+            return [
+              'success' => false,
+              'error' => $e
+            ];
+        }
+    }
+
+    private function securityToken()
+    {
+        return Configuration::$webhookSecretKey;
+    }
 }
