@@ -21,10 +21,10 @@ Configuration::$publicKey = '<public_key>';
 // Resources, which map to http endpoints, can all be found in the resources folder.
 // Fetch a paginated list of customers
 $response = Customer::list();
-print_r($response['body']);
+print_r($response->body);
 
 // List call responses will be paginated and you can see the pagination data as follows
-print_r($response['pagination']);
+print_r($response->pagination);
 
 ```
 
