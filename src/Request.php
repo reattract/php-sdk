@@ -1,8 +1,8 @@
 <?php
 
-namespace Reattract\Reattract;
+namespace Reattract\Sdk;
 
-use Reattract\Reattract\JwtGenerator;
+use Reattract\Sdk\JwtGenerator;
 use GuzzleHttp\Client;
 
 class Request

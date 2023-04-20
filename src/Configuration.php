@@ -1,6 +1,6 @@
 <?php
 
-namespace Reattract\Reattract;
+namespace Reattract\Sdk;
 
 class Configuration
 {

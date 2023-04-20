@@ -1,8 +1,8 @@
 <?php
 
-namespace Reattract\Reattract\Resources;
+namespace Reattract\Sdk\Resources;
 
-use Reattract\Reattract\Request;
+use Reattract\Sdk\Request;
 
 class AppEvent 
 {

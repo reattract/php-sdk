@@ -1,8 +1,8 @@
 <?php
 
-namespace Reattract\Reattract;
+namespace Reattract\Sdk;
 
-use Reattract\Reattract\Configuration;
+use Reattract\Sdk\Configuration;
 
 use Firebase\JWT\JWT;
 

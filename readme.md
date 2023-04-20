@@ -11,8 +11,8 @@ Reattract PHP SDK
 
 require('vendor/autoload.php');
 
-use Reattract\Reattract\Configuration;
-use Reattract\Reattract\Resources\Customer;
+use Reattract\Sdk\Configuration;
+use Reattract\Sdk\Resources\Customer;
 
 // Configuration values are static and can be part of your application initializtion.
 Configuration::$secretKey = '<secret_key>;
@@ -33,8 +33,8 @@ print_r($response['pagination']);
 <?php
 // Verify webhooks
 
-use Reattract\Reattract\Configuration;
-use Reattract\Reattract\WebhookVerification;
+use Reattract\Sdk\Configuration;
+use Reattract\Sdk\WebhookVerification;
 
 Configuration::$webhookSecretKey = 'whsec_MfKQ9r8GKYqrTwjUPD8ILPZIo2LaLaSw';
 
