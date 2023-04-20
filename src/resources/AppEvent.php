@@ -3,10 +3,14 @@
 namespace Reattract\Sdk\Resources;
 
 use Reattract\Sdk\Request;
+use Reattract\Sdk\PaginatedResponse;
 
 class AppEvent
 {
-    public static function create($eventName, $userId, $payload = null)
+    /**
+     * @param mixed $payload
+     */
+    public static function create(string $eventName, string $userId, mixed $payload = null): PaginatedResponse
     {
         $json = [
           'payload' => $payload,
@@ -16,7 +20,7 @@ class AppEvent
         return self::request()->post($json);
     }
 
-    private static function request()
+    private static function request(): Request
     {
         return new Request('/customer_events');
     }

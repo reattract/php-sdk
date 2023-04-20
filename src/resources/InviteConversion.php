@@ -3,10 +3,14 @@
 namespace Reattract\Sdk\Resources;
 
 use Reattract\Sdk\Request;
+use Reattract\Sdk\PaginatedResponse;
 
 class InviteConversion
 {
-    public static function create($userId, $inviteCode = null, $inviteSessionId = null, $customer = [])
+    /**
+     * @param array<string, mixed> $customer
+     */
+    public static function create(string $userId, string|null $inviteCode = null, string|null $inviteSessionId = null, array $customer = []): PaginatedResponse
     {
         $json = [
           'organization_user_id' => $userId,
@@ -17,7 +21,10 @@ class InviteConversion
         return self::collectionRequest()->post($json);
     }
 
-    public static function list($limit = 20, $page = 1, $order = ['id desc'])
+    /**
+     * @param array<string> $order
+     */
+    public static function list(int $limit = 20, int $page = 1, array $order = ['id desc']): PaginatedResponse
     {
         return self::collectionRequest()->get(
             [
@@ -30,7 +37,7 @@ class InviteConversion
         );
     }
 
-    private static function collectionRequest()
+    private static function collectionRequest(): Request
     {
         return new Request('/invite_conversions');
     }

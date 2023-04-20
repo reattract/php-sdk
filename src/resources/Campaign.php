@@ -3,10 +3,14 @@
 namespace Reattract\Sdk\Resources;
 
 use Reattract\Sdk\Request;
+use Reattract\Sdk\PaginatedResponse;
 
 class Customer
 {
-    public static function list($limit = 20, $page = 1, $order = ['id desc'])
+    /**
+     * @param array<string> $order
+     */
+    public static function list(int $limit = 20, int $page = 1, array $order = ['id desc']): PaginatedResponse
     {
         return self::collectionRequest()->get(
             [
@@ -19,7 +23,7 @@ class Customer
         );
     }
 
-    private static function collectionRequest()
+    private static function collectionRequest(): Request
     {
         return new Request('/campaigns');
     }

@@ -3,18 +3,23 @@
 namespace Reattract\Sdk;
 
 use Reattract\Sdk\JwtGenerator;
+use Reattract\Sdk\PaginatedResponse;
+use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Client;
 
 class Request
 {
-    public $path;
+    public string $path;
 
-    public function __construct($path)
+    public function __construct(string $path)
     {
         $this->path = $path;
     }
 
-    public function get($query = [])
+    /**
+     * @param array<string, mixed> $query
+     */
+    public function get(array $query = []): PaginatedResponse
     {
         $client = $this->client();
         $response = $client->request('GET', $this->url(), [
@@ -25,7 +30,10 @@ class Request
         return $this->formatResponse($response);
     }
 
-    public function patch($json = [])
+    /**
+     * @param array<string, mixed> $json
+     */
+    public function patch(array $json = []): PaginatedResponse
     {
         $client = $this->client();
         $response = $client->request('PATCH', $this->url(), [
@@ -35,7 +43,7 @@ class Request
         return $this->formatResponse($response);
     }
 
-    public function delete()
+    public function delete(): PaginatedResponse
     {
         $client = $this->client();
         $response = $client->request('DELETE', $this->url());
@@ -43,7 +51,10 @@ class Request
         return $this->formatResponse($response);
     }
 
-    public function post($json = [])
+    /**
+     * @param array<string, mixed> $json
+     */
+    public function post(array $json = []): PaginatedResponse
     {
         $client = $this->client();
         $response = $client->request('POST', $this->url(), [
@@ -53,7 +64,7 @@ class Request
         return $this->formatResponse($response);
     }
 
-    private function client()
+    private function client(): Client
     {
         return new Client([
             'headers' => [
@@ -64,37 +75,30 @@ class Request
         ]);
     }
 
-    private function formatResponse($response)
+    private function formatResponse(ResponseInterface $response): PaginatedResponse
     {
         $contents = $response->getBody()->getContents();
         $status = $response->getStatusCode();
         $pagination = $this->extrctPagination($response);
 
-        $helpfulResponse = [
-            'body' => json_decode($contents, true),
-            'status' => $status,
-            'response' => $response
-        ];
-
-        if($pagination !== null) {
-            $helpfulResponse['pagination'] = $pagination;
-        }
-
-        return $helpfulResponse;
+        return new PaginatedResponse(json_decode($contents, true), $status, $response, $pagination);
     }
 
-    private function url()
+    private function url(): string
     {
         return Configuration::url() . $this->path;
     }
 
-    private function jwt()
+    private function jwt(): string
     {
         $jwtGenerator = new JwtGenerator();
         return $jwtGenerator->generate();
     }
 
-    private function extrctPagination($response)
+    /**
+     * @return array{'pageItems': int, 'currentPage': int, 'totalPages': int, 'totalCount': int} | null
+     */
+    private function extrctPagination(ResponseInterface $response)
     {
         if($response->hasHeader('Page-Items') === false) {
             return null;
@@ -103,10 +107,10 @@ class Request
         $headers = $response->getHeaders();
 
         return [
-            'pageItems' => $headers['Page-Items'],
-            'currentPage' => $headers['Current-Page'],
-            'totalPages' => $headers['Total-Pages'],
-            'totalCount' => $headers['Total-Count']
+            'pageItems' => intval(implode($headers['Page-Items'])),
+            'currentPage' => intval(implode($headers['Current-Page'])),
+            'totalPages' => intval(implode($headers['Total-Pages'])),
+            'totalCount' => intval(implode($headers['Total-Count']))
         ];
     }
 }

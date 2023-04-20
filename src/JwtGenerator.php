@@ -8,10 +8,13 @@ use Firebase\JWT\JWT;
 
 class JwtGenerator
 {
-    public $expiredAt;
-    public $scopes;
+    public \DateTime $expiredAt;
+    public string $scopes;
 
-    public function __construct($expiredAt = null, $scopes = [])
+    /**
+     * @param string[] $scopes
+     */
+    public function __construct(\DateTime $expiredAt = null, array $scopes = [])
     {
         if ($expiredAt === null) {
             $expiredAt = $this->getDefaultExpiredAt();
@@ -20,12 +23,15 @@ class JwtGenerator
         $this->scopes = implode(',', $scopes);
     }
 
-    public function generate()
+    public function generate(): string
     {
         return JWT::encode($this->payload(), $this->key(), 'HS256');
     }
 
-    private function payload()
+    /**
+     * @return array{'exp': int, 'nbf': int, 'iss': string, 'iat': int}
+     */
+    private function payload(): array
     {
         $jwtCreatedAt = new \DateTime();
 
@@ -37,12 +43,12 @@ class JwtGenerator
         ];
     }
 
-    private function key()
+    private function key(): string
     {
         return Configuration::$secretKey;
     }
 
-    private function getDefaultExpiredAt()
+    private function getDefaultExpiredAt(): \DateTime
     {
         $currentDateTime = new \DateTime();
         // Add one week to the DateTime object

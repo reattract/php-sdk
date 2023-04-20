@@ -4,15 +4,15 @@ namespace Reattract\Sdk;
 
 class Configuration
 {
-    public static $publicKey = null;
-    public static $secretKey = null;
-    public static $webhookSecretKey = null;
-    public static $apiVersion = '/v1';
-    public static $apiHost = 'api.reattract.io';
-    public static $useSsl = true;
-    public static $port = null;
+    public static string $publicKey = '';
+    public static string $secretKey = '';
+    public static string $webhookSecretKey = '';
+    public static string $apiVersion = '/v1';
+    public static string $apiHost = 'api.reattract.io';
+    public static bool $useSsl = true;
+    public static int|null $port = null;
 
-    public static function url()
+    public static function url(): string
     {
         $scheme = (self::$useSsl) ? 'https://' : 'http://';
 
