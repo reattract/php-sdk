@@ -8,20 +8,20 @@ use Reattract\Sdk\PaginatedResponse;
 class Customer
 {
     /**
-     * @param array<string, mixed> $json
+     * @param array{first_name?: string, last_name?: string, email?: string} $customerData
      */
-    public static function create(string $userId, array $json = []): PaginatedResponse
+    public static function create(string $userId, array $customerData = []): PaginatedResponse
     {
         $json['organization_user_id'] = $userId;
-        return self::collectionRequest()->post($json);
+        return self::collectionRequest()->post($customerData);
     }
 
     /**
-     * @param array<string, mixed> $json
+     * @param array{first_name?: string, last_name?: string, email?: string} $customerData
      */
-    public static function update(string $userId, array $json = []): PaginatedResponse
+    public static function update(string $userId, array $customerData = []): PaginatedResponse
     {
-        return self::memberRequest($userId)->patch($json);
+        return self::memberRequest($userId)->patch($customerData);
     }
 
     public static function get(string $userId): PaginatedResponse

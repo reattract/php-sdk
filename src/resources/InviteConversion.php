@@ -8,15 +8,15 @@ use Reattract\Sdk\PaginatedResponse;
 class InviteConversion
 {
     /**
-     * @param array<string, mixed> $customer
+     * @param array{first_name?: string, last_name?: string, email?: string} $customerData
      */
-    public static function create(string $userId, string|null $inviteCode = null, string|null $inviteSessionId = null, array $customer = []): PaginatedResponse
+    public static function create(string $userId, string|null $inviteCode = null, string|null $inviteSessionId = null, array $customerData = []): PaginatedResponse
     {
         $json = [
           'organization_user_id' => $userId,
           'unique_code' => $inviteCode,
           'invite_session_id' => $inviteSessionId,
-          'organization_customer' => $customer
+          'organization_customer' => $customerData
         ];
         return self::collectionRequest()->post($json);
     }
