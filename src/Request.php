@@ -104,8 +104,6 @@ class Request
             return null;
         }
 
-        $headers = $response->getHeaders();
-
         return [
             'pageItems' => intval(implode($response->getHeader('Page-Items'))),
             'currentPage' => intval(implode($response->getHeader('Current-Page'))),
