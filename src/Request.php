@@ -107,10 +107,10 @@ class Request
         $headers = $response->getHeaders();
 
         return [
-            'pageItems' => intval(implode($headers['Page-Items'])),
-            'currentPage' => intval(implode($headers['Current-Page'])),
-            'totalPages' => intval(implode($headers['Total-Pages'])),
-            'totalCount' => intval(implode($headers['Total-Count']))
+            'pageItems' => intval(implode($response->getHeader('Page-Items'))),
+            'currentPage' => intval(implode($response->getHeader('Current-Page'))),
+            'totalPages' => intval(implode($response->getHeader('Total-Pages'))),
+            'totalCount' => intval(implode($response->getHeader('Total-Count')))
         ];
     }
 }
